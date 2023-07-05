@@ -1,0 +1,279 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linux安装Redis | 知行合一</title>
+<link rel="shortcut icon" href="https://liuyoung-cc.github.io/favicon.ico?v=1688542791886">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://liuyoung-cc.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Linux安装Redis | 知行合一 - Atom Feed" href="https://liuyoung-cc.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一、下载安装包
+访问https://redis.io/download 到官网进行下载。这里下载最新的4.0版本
+
+二、安装
+1.通过远程管理工具，将压缩包拷贝到Linux服务器中，执行解压操作，输入命令：
+tar -zxf redis-4..." />
+    <meta name="keywords" content="linux" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://liuyoung-cc.github.io">
+  <img class="avatar" src="https://liuyoung-cc.github.io/images/avatar.png?v=1688542791886" alt="">
+  </a>
+  <h1 class="site-title">
+    知行合一
+  </h1>
+  <p class="site-description">
+    年与时驰，意与日去，遂成枯落，多不接世
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/liuyoung-cc/liuyoung-cc.github.io" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+        <a href="https://weibo.com/u/6429169213" target="_blank">
+          <i class="ri-weibo-line"></i>
+        </a>
+      
+    
+      
+        <a href="https://www.zhihu.com/people/liu-bei-70-46-15" target="_blank">
+          <i class="ri-zhihu-line"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Linux安装Redis
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-05-20
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://liuyoung-cc.github.io/tag/TC_INGJ3R/" class="post-tag">
+                  # linux
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h4 id="一-下载安装包">一、下载安装包</h4>
+<p>访问https://redis.io/download 到官网进行下载。这里下载最新的4.0版本</p>
+<img src="https://pic1.imgdb.cn/item/6468cdb7e03e90d874413330.png" alt="image-20211029103735678" style="zoom:50%;margin:0" />
+<h4 id="二-安装">二、安装</h4>
+<p>1.通过远程管理工具，将压缩包拷贝到Linux服务器中，执行解压操作，输入命令：</p>
+<pre><code>tar -zxf redis-4.0.9.tar.gz
+</code></pre>
+<img src="https://pic1.imgdb.cn/item/6468cdc4e03e90d87441416d.png" alt="image-20211029103735678" style="margin:0" />
+<p>2.进入解压文件目录使用make对解压的Redis文件进行编译</p>
+<p>图示：这里因为我redis的安装目录在 /usr/local/  目录下，因此会有如下操作</p>
+<img src="https://pic1.imgdb.cn/item/6468cdd0e03e90d87441521e.png" alt="image-20211029103735678" style="margin:0" />
+<img src="https://pic1.imgdb.cn/item/6468cddfe03e90d874416a62.png" alt="image-20211029103735678" style="margin:0" />
+<p>注：如果在编译过程中出现问题，有可能是安装包下载的有误，这里可以尝试的用别人下载的安装包或者直接用</p>
+<pre><code>wget http://download.redis.io/releases/redis-4.0.9.tar.gz
+</code></pre>
+<p>如果发现上述读不能解决问题，请参照该链接：https://www.cnblogs.com/liu2-/p/6914159.html<br>
+编译完成之后，可以看到解压文件redis-3.0.7 中会有对应的src、conf等文件夹</p>
+<img src="https://pic1.imgdb.cn/item/6468cdeee03e90d8744183fa.png" alt="image-20211029103735678" style="margin:0" />
+<p>3.编译成功后，进入src文件夹，执行make install进行Redis安装，如下图示安装完成，界面如下：</p>
+<img src="https://pic1.imgdb.cn/item/6468ce00e03e90d87441a918.png" alt="image-20211029103735678" style="margin:0" />
+<h4 id="三-部署">三、部署</h4>
+<p>1.为了方便管理，将Redis文件中的conf配置文件和常用命令移动到统一文件中</p>
+<p>1）、创建bin和etc文件，如图示：</p>
+<img src="https://pic1.imgdb.cn/item/6468ce0de03e90d87441c512.png" alt="image-20211029103735678" style="margin:0" />
+<p>2）、回到刚刚安装目录，找到redis.conf，将其复制移动到 /usr/local/redis/ect 下，执行命令如下：</p>
+<pre><code>mv redis.conf /usr/local/redis/etc/
+</code></pre>
+<img src="https://pic1.imgdb.cn/item/6468ce1ce03e90d87441e541.png" alt="image-20211029103735678" style="margin:0" />
+<p>进入src目录，移动mkreleasehdr.sh redis-benchmark redis-check-aof redis-check-rdb redis-cli redis-server到/usr/local/redis/bin/，执行命令 ：</p>
+<pre><code>mv mkreleasehdr.sh redis-benchmark redis-check-aof redis-check-rdb redis-cli redis-server /usr/local/redis/bin/
+</code></pre>
+<img src="https://pic1.imgdb.cn/item/6468ce26e03e90d87441ffa0.png" alt="image-20211029103735678" style="margin:0" />
+<p>依次查看移动后文件</p>
+<img src="https://pic1.imgdb.cn/item/6468ce32e03e90d874420f84.png" alt="image-20211029103735678" style="margin:0" />
+<p>2、执行redis-server 启动redis</p>
+<img src="https://pic1.imgdb.cn/item/6468ce41e03e90d87442266d.png" alt="image-20211029103735678" style="margin:0" />
+<p>3、设置绑定ip（注：该步骤如果不需要可省略）</p>
+<img src="https://pic1.imgdb.cn/item/6468ce4fe03e90d874423d81.png" alt="image-20211029103735678" style="margin:0" />
+<p>如需要，可将上图绑定ip改为指定ip。</p>
+<p>4、设置后台启动redis</p>
+<p>1）、首先编辑conf文件，将daemonize属性改为yes（表明需要在后台运行）</p>
+<pre><code>cd etc/
+vim redis.conf
+</code></pre>
+<img src="https://pic1.imgdb.cn/item/6468ce5be03e90d8744254b6.png" alt="image-20211029103735678" style="margin:0" />
+<p>将no修改为yes</p>
+<p>2)、再次启动redis服务，并指定启动服务配置文件</p>
+<pre><code>redis-server /usr/local/redis/etc/redis.conf
+</code></pre>
+<img src="https://pic1.imgdb.cn/item/6468ce66e03e90d8744270cc.png" alt="image-20211029103735678" style="margin:0" />
+<p>配置后台运行成功。``</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85">一、下载安装包</a></li>
+<li><a href="#%E4%BA%8C-%E5%AE%89%E8%A3%85">二、安装</a></li>
+<li><a href="#%E4%B8%89-%E9%83%A8%E7%BD%B2">三、部署</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://liuyoung-cc.github.io/post/linux-an-zhuang-nginx/">
+              <h3 class="post-title">
+                Linux安装Nginx
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '4970b3e2cb2b185b5af7',
+    clientSecret: 'a413a9c025c85c8c7d510b5b5cbe613c47e76bdc',
+    repo: 'liuyoung-cc.github.io',
+    owner: 'liuyoung-cc',
+    admin: ['liuyoung-cc'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp;<a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://liuyoung-cc.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

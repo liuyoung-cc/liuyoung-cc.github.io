@@ -1,0 +1,305 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>JDK和Maven配置 | 知行合一</title>
+<link rel="shortcut icon" href="https://liuyoung-cc.github.io/favicon.ico?v=1688542791886">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://liuyoung-cc.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="JDK和Maven配置 | 知行合一 - Atom Feed" href="https://liuyoung-cc.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一、jdk环境变量配置
+找到系统环境变量
+新建JAVA_HOME系统变量
+变量名：JAVA_HOME，变量值：C:\Program Files\Java\jdk1.8.0_171(这里填你自己选择的安装路径！！！)
+新建CLASSPATH变..." />
+    <meta name="keywords" content="java" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://liuyoung-cc.github.io">
+  <img class="avatar" src="https://liuyoung-cc.github.io/images/avatar.png?v=1688542791886" alt="">
+  </a>
+  <h1 class="site-title">
+    知行合一
+  </h1>
+  <p class="site-description">
+    年与时驰，意与日去，遂成枯落，多不接世
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/liuyoung-cc/liuyoung-cc.github.io" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+        <a href="https://weibo.com/u/6429169213" target="_blank">
+          <i class="ri-weibo-line"></i>
+        </a>
+      
+    
+      
+        <a href="https://www.zhihu.com/people/liu-bei-70-46-15" target="_blank">
+          <i class="ri-zhihu-line"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              JDK和Maven配置
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-05-20
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://liuyoung-cc.github.io/tag/pJtOg0Zsv/" class="post-tag">
+                  # java
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h4 id="一-jdk环境变量配置">一、jdk环境变量配置</h4>
+<p>找到系统环境变量<br>
+新建JAVA_HOME系统变量<br>
+变量名：<strong>JAVA_HOME</strong>，变量值：<strong>C:\Program Files\Java\jdk1.8.0_171</strong>(这里填你自己选择的安装路径！！！)<br>
+新建CLASSPATH变量<br>
+变量名：<strong>CLASSPATH</strong>,，变量值： <strong>.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar</strong>（注意最前面有一点）。<br>
+配置系统环境变量Path<br>
+双击<strong>Path</strong>--&gt;新建--&gt;添加“<strong>%JAVA_HOME%\bin</strong>”--&gt;将这一行变量上移到最顶端--&gt;完成<br>
+测试安装是否完成，win+R弹出运行窗口后，输入cmd，回车弹出命令行窗口，分别输java -version、javac</p>
+<h4 id="二-maven配置">二、Maven配置</h4>
+<p>Maven环境变量配置</p>
+<p>新建系统变量:<br>
+变量名：<strong>MAVEN_HOME</strong><br>
+变量值：<strong>F:\dev\apache-maven-3.6.1</strong>【这是maven安装地址】<br>
+编辑系统变相<strong>Path</strong>：<br>
+在最后加上：<strong>%MAVEN_HOME%\bin</strong><br>
+cmd验证是否安装成功：mvn -version</p>
+<p>Eclipse和Maven设置</p>
+<p>修改Eclipse的MAVEN的存储位置：<br>
+Window-&gt;Preferences-&gt;Maven-&gt;Installations：选择本地maven的安装地址<br>
+Window-&gt;Preferences-&gt;Maven-&gt;User Settings：点击Browser按钮，选择maven配置文件【settings.xml】，点击update Settings按钮即可。<br>
+Eclipse字体大小设置<br>
+Window-&gt;Prefrences-&gt;General-&gt;Appearance-&gt;Colors and Fonts-&gt;Basic-&gt;Text Font-&gt;Edit</p>
+<p>更改maven默认仓库地址</p>
+<pre><code class="language-xml">&lt;!-- localRepository
+   | The path to the local repository maven will use to store artifacts.
+   |
+   | Default: ~/.m2/repository
+&lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;
+--&gt;
+修改为：
+&lt;!-- localRepository
+   | The path to the local repository maven will use to store artifacts.
+   |
+   | Default: ~/.m2/repository
+&lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;
+--&gt;
+&lt;localRepository&gt;E:/mavenrepository&lt;/localRepository&gt;
+</code></pre>
+<p>Maven官网仓库地址替换为国内访问速度较快的镜像地址</p>
+<p>第一种方法：在settings.xml中找到mirrors标签里面配一个mirror，让中央仓库（central）的默认地址被aliyun拦截。</p>
+<pre><code class="language-xml">&lt;mirror&gt;
+      &lt;id&gt;mirrorId&lt;/id&gt;
+      &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+      &lt;name&gt;Human Readable Name for this Mirror.&lt;/name&gt;
+      &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;
+&lt;/mirror&gt;
+</code></pre>
+<p>第二种方法：直接在pom.xml上改</p>
+<pre><code class="language-xml">&lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;aliyun&lt;/id&gt;
+            &lt;name&gt;aliyun&lt;/name&gt;
+            &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;
+            &lt;layout&gt;default&lt;/layout&gt;
+            &lt;releases&gt;
+                &lt;enabled&gt;true&lt;/enabled&gt;
+                &lt;updatePolicy&gt;never&lt;/updatePolicy&gt;
+            &lt;/releases&gt;
+            &lt;snapshots&gt;
+                &lt;enabled&gt;true&lt;/enabled&gt;
+                &lt;updatePolicy&gt;never&lt;/updatePolicy&gt;
+            &lt;/snapshots&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+    &lt;pluginRepositories&gt;
+            &lt;pluginRepository&gt;
+            &lt;id&gt;aliyun&lt;/id&gt;
+            &lt;name&gt;aliyun&lt;/name&gt;
+            &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;
+            &lt;releases&gt;
+                &lt;enabled&gt;true&lt;/enabled&gt;
+            &lt;/releases&gt;
+            &lt;snapshots&gt;
+                &lt;enabled&gt;false&lt;/enabled&gt;
+            &lt;/snapshots&gt;
+            &lt;/pluginRepository&gt;
+        &lt;/pluginRepositories&gt;
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%B8%80-jdk%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE">一、jdk环境变量配置</a></li>
+<li><a href="#%E4%BA%8C-maven%E9%85%8D%E7%BD%AE">二、Maven配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://liuyoung-cc.github.io/post/shou-ji-hao-ma-gui-shu-di/">
+              <h3 class="post-title">
+                java工具类
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '4970b3e2cb2b185b5af7',
+    clientSecret: 'a413a9c025c85c8c7d510b5b5cbe613c47e76bdc',
+    repo: 'liuyoung-cc.github.io',
+    owner: 'liuyoung-cc',
+    admin: ['liuyoung-cc'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp;<a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://liuyoung-cc.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

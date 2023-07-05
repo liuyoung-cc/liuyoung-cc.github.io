@@ -1,0 +1,269 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>使用Auto.js实现钉钉自动打卡 | 知行合一</title>
+<link rel="shortcut icon" href="https://liuyoung-cc.github.io/favicon.ico?v=1688542791886">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://liuyoung-cc.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="使用Auto.js实现钉钉自动打卡 | 知行合一 - Atom Feed" href="https://liuyoung-cc.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="// 判断是否唤醒
+if (!device.isScreenOn()) {
+    device.wakeUpIfNeeded(); // 设备未唤醒，进行唤醒
+    device.keepScreenOn(); //保持亮屏
+    s..." />
+    <meta name="keywords" content="其它" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://liuyoung-cc.github.io">
+  <img class="avatar" src="https://liuyoung-cc.github.io/images/avatar.png?v=1688542791886" alt="">
+  </a>
+  <h1 class="site-title">
+    知行合一
+  </h1>
+  <p class="site-description">
+    年与时驰，意与日去，遂成枯落，多不接世
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/liuyoung-cc/liuyoung-cc.github.io" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+        <a href="https://weibo.com/u/6429169213" target="_blank">
+          <i class="ri-weibo-line"></i>
+        </a>
+      
+    
+      
+        <a href="https://www.zhihu.com/people/liu-bei-70-46-15" target="_blank">
+          <i class="ri-zhihu-line"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              使用Auto.js实现钉钉自动打卡
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-05-21
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://liuyoung-cc.github.io/tag/aDo9-TH1B/" class="post-tag">
+                  # 其它
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <pre><code class="language-js">// 判断是否唤醒
+if (!device.isScreenOn()) {
+    device.wakeUpIfNeeded(); // 设备未唤醒，进行唤醒
+    device.keepScreenOn(); //保持亮屏
+    sleep(2000);
+    // 上滑打开锁屏界面
+    swipe(500, 1200, 500, 500, 500)
+    sleep(800);
+    // 输入锁屏密码
+    // 第一种：数字密码形式
+    desc(4).findOne().click();
+    sleep(500);
+    desc(2).findOne().click();
+    sleep(500);
+    desc(8).findOne().click();
+    sleep(500);
+    desc(6).findOne().click();
+    sleep(500);
+    // 第二种：图案形式
+    // 坐标位置
+    // 1 4 7
+    // 2 5 8
+    // 3 6 9
+    //function pwd(number) {
+        //var arr = Array(null, [220, 1100], [220, 1400], [220, 1700], [520, 1100], [520, 1400], [520, 1700], [820, 1100], [820, 1400], [820, 1700]);
+        //return arr[number];
+    //}
+    //根据需要来改动位置，下方为Z字型的手势示范
+    //gesture(1000, pwd(1), pwd(4), pwd(7), pwd(5), pwd(3), pwd(6), pwd(9));
+}
+// 获取当前时间，非工作日不启动
+var curr_time = new Date();
+var now_Hours = curr_time.getHours();
+var now_Minutes = curr_time.getMinutes();
+var now_Day = curr_time.getDay();
+if (now_Day != 0) {
+    while (true) {
+        var autoJsApp = desc(&quot;Auto.js&quot;).findOnce();
+        if (autoJsApp == null) {
+            // 点击home键
+            click(520, 2300)
+            sleep(3000);
+            // 滑动桌面，直到找到auto.js
+            // swipe(800, 500, 200, 500, 100)
+        } else {
+            autoJsApp.click();
+            sleep(1000);
+            // 打开钉钉
+            var DingTalkPackageName = getPackageName(&quot;钉钉&quot;); //获取应用包名称
+            launch(DingTalkPackageName); //根据应用包名启动某个应用
+            device.cancelKeepingAwake(); //取消屏幕常亮。
+            engines.myEngine().forceStop(); //停止当前脚本
+            break;
+        }
+    }
+} else {
+    toast(&quot;今天无需打卡&quot;);
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://liuyoung-cc.github.io/post/xiao-ji-qiao/">
+              <h3 class="post-title">
+                小技巧
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '4970b3e2cb2b185b5af7',
+    clientSecret: 'a413a9c025c85c8c7d510b5b5cbe613c47e76bdc',
+    repo: 'liuyoung-cc.github.io',
+    owner: 'liuyoung-cc',
+    admin: ['liuyoung-cc'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp;<a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://liuyoung-cc.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
